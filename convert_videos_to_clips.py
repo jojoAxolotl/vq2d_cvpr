@@ -110,9 +110,18 @@ def video_to_clip_fn(inputs):
 def main(args):
     # Load annotations
     annotation_export = []
+    
     for annot_path in args.annot_paths:
-        annotation_export += json.load(open(annot_path, "r"))["videos"]
-    video_uids = sorted([a["video_uid"] for a in annotation_export])
+        # annotation_export += json.load(open(annot_path, "r"))["videos"]
+        annotation_export += json.load(open(annot_path, "r")).items()
+
+    # video_uids = sorted([a["video_uid"] for a in annotation_export])
+
+    print(annotation_export)
+
+    video_uids = sorted([a for a in annotation_export])
+    
+
     os.makedirs(args.save_root, exist_ok=True)
     if args.video_batch_idx >= 0:
         video_uid_batches = batchify_video_uids(video_uids, args.video_batch_size)

@@ -49,14 +49,23 @@ def process_video_annot_jokodatasets(video_name, video_data, n_samples_so_far):
         for qset_id, qset in clip_annot["query_sets"].items():
             if not qset["is_valid"]:
                 continue
+            
+            response_track = qset["response_track"]
+            response_track_frame_number = [ frame['frame_number'] for frame in response_track ]
+            response_track_frame_number.sort()
+
             curr_annot = {
+                
                 # "metadata": {      
                     # "video_start_sec": clip_data["video_start_sec"],
                     # "video_end_sec": clip_data["video_end_sec"],
                     # "clip_fps": clip_data["clip_fps"],
                 # },
-                # "clip_uid": clip_data["clip_uid"],
 
+                "video_start_frame": response_track_frame_number[0],
+                "video_end_frame": response_track_frame_number[-1],
+
+                "clip_uid": video_name + "-" + qset_id,
                 "video_uid": video_name,
                 "query_set": qset_id,
                 "query_frame": qset["query_frame"],

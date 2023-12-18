@@ -94,15 +94,18 @@ def do_train(cfg, model, resume=False):
         set_model_to_train(model)
     # optimizer = build_optimizer(cfg, model)
     params_backbone = {
-        'params': model.module.backbone.parameters(),
+        # 'params': model.module.backbone.parameters(),
+        'params': model.backbone.parameters(),
         "lr": cfg.SOLVER.BASE_LR*0.1
     }
     params_proposal_generator = {
-        'params': model.module.proposal_generator.parameters(),
+        # 'params': model.module.proposal_generator.parameters(),
+        'params': model.proposal_generator.parameters(),
         "lr": cfg.SOLVER.BASE_LR*0.1
     }
     params_roi_heads = {
-        'params': model.module.roi_heads.parameters(),
+        # 'params': model.module.roi_heads.parameters(),
+        'params': model.roi_heads.parameters(),
         "lr": cfg.SOLVER.BASE_LR
     }
     params_list = [params_backbone, params_roi_heads, params_proposal_generator]
