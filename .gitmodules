@@ -1,3 +1,6 @@
 [submodule "detectron2"]
 	path = detectron2
 	url = https://github.com/facebookresearch/detectron2.git
+[submodule "dependencies/Pytorch-Correlation-extension"]
+	path = dependencies/Pytorch-Correlation-extension
+	url = git@github.com:ClementPinard/Pytorch-Correlation-extension.git
